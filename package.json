@@ -1,9 +1,17 @@
 {
-  "name": "lil.js",
+  "name": "@berslucas/liljs",
   "version": "1.0.0",
   "description": "A micro-framework for Javascript data-binding.",
   "main": "dist/lil.js",
-  "repository": "https://github.com/bersLucas/lil.js",
+  "repository": "https://github.com/bersLucas/liljs",
+  "keywords": [
+    "framework",
+    "one-way binding",
+    "lil",
+    "micro-framework",
+    "MVW"
+  ],
+  "bugs": "https://github.com/bersLucas/liljs/issues",
   "author": "bersLucas <contact@lucasbersier.com>",
   "browserslist": "> 0.25%, not dead",
   "license": "MIT",
