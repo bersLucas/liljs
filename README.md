@@ -1,4 +1,4 @@
-# lil.js
+![liljs logo](https://user-images.githubusercontent.com/3892772/52523602-d0054680-2c60-11e9-9cba-582003254e54.png)
 
 ![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square) 
 [![version](https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square)](https://www.npmjs.com/package/@berslucas/liljs)
