@@ -1,0 +1,25 @@
+{
+  "name": "lil.js",
+  "version": "1.0.0",
+  "description": "A micro-framework for Javascript data-binding.",
+  "main": "dist/lil.js",
+  "repository": "https://github.com/bersLucas/lil.js",
+  "author": "bersLucas <contact@lucasbersier.com>",
+  "browserslist": "> 0.25%, not dead",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "babel": "npx babel src --out-dir dist  --presets=@babel/preset-env",
+    "minify": "uglifyjs dist/liljs.js -o dist/liljs.min.js --source-map",
+    "docs": "jsdoc src/liljs.js -d docs",
+    "default": "yarn run babel && yarn run minify && yarn run docs"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "jsdoc": "^3.5.5",
+    "uglify-js": "^3.4.9"
+  }
+}
