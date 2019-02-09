@@ -1,8 +1,8 @@
 # lil.js
 
 ![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square) 
-![version](https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square)
-![David Dependency Status](https://img.shields.io/david/bersLucas/liljs.svg?style=popout-square)
+[![version](https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square)](https://www.npmjs.com/package/@berslucas/liljs)
+[![David Dependency Status](https://img.shields.io/david/bersLucas/liljs.svg?style=popout-square)](https://david-dm.org/bersLucas/liljs)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 # Installation 
