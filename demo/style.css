@@ -13,6 +13,16 @@ body {
   margin: auto;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.margin-children * {
+  margin-bottom: 4px;
+  margin-top: 4px;
+}
+
 #logo-flex {
   display: flex;
   justify-content: space-between;

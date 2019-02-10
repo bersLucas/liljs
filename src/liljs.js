@@ -56,6 +56,18 @@ const liljs = (elem, data = {}) => {
       });
     };
 
+    const setModel = (elem, property, value) => {
+      if(['checkbox', 'radio'].some((x) => x === elem.type)) {
+        if (value || state[property].value) {
+          elem.setAttribute('checked', '');
+        } else {
+          elem.removeAttribute('checked')
+        }
+      } else {
+        elem.value = value || state[property].value
+      }
+    };
+
     state[property].elem.forEach(elem => {
       switch (state[property].bindType) {
         case "text":
@@ -67,6 +79,8 @@ const liljs = (elem, data = {}) => {
         case "list":
           setList(elem, property);
           break;
+        case "model":
+          setModel(elem, property)
       }
     });
 
@@ -95,7 +109,7 @@ const liljs = (elem, data = {}) => {
   }
 
   // Initialization
-  ["text", "style", "list"].forEach(bindType => {
+  ["text", "style", "list", "model"].forEach(bindType => {
     elem.querySelectorAll(`[lil-${bindType}]`).forEach(elem => {
       const attributeName = elem.getAttribute(`lil-${bindType}`);
 

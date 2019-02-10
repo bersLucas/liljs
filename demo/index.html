@@ -127,6 +127,66 @@
       }, 1000);
     </script>
   </template>
+
+  <template demo for="lil-model">
+
+      <div class="app" id="app5">
+
+          <div class="column margin-children">
+
+              <input
+                     lil-model="inputOne"/>
+
+              <textarea style="min-height: 50px;"
+                        lil-model="textareaOne"></textarea>
+
+              <select lil-model="selectOne">
+                  <option value="no">Terrible Selection</option>
+                  <option value="yes">Select Too!</option>
+                  <option value="nope">Evil Selection</option>
+              </select>
+
+              <label>
+                  <input lil-model="checkOne"
+                         type="checkbox"
+                         value="y">Checkboxes Work
+              </label>
+
+              <label>
+                  <input lil-model="checkTwo"
+                         type="checkbox"
+                         value="n">Checkboxes Fail
+              </label>
+
+              <label>
+                  <input lil-model="radioOne"
+                         type="radio"
+                         value="y">Radio Buttons Work
+              </label>
+
+              <label>
+                  <input lil-model="radioTwo"
+                         type="radio"
+                         value="n">Radio Buttons Fail
+              </label>
+
+          </div>
+
+      </div>
+
+    <script>
+      var app5 = liljs(document.querySelector('#app5'), {
+        inputOne: 'Input Works',
+        textareaOne: 'Textarea\nAlso\nWorks',
+        selectOne: 'yes',
+        checkOne: true,
+        checkTwo: false,
+        radioOne: true,
+        radioTwo: false,
+      });
+    </script>
+  </template>
+
 </body>
 
 <script src="script.js"></script>
