@@ -21,7 +21,7 @@
     "minify": "uglifyjs dist/liljs.js -o dist/liljs.min.js --source-map",
     "docs": "jsdoc src/liljs.js -d docs",
     "default": "yarn run babel && yarn run minify && yarn run docs",
-    "test": "karma start karma.conf.js --log-level debug --single-run"
+    "test": "karma start karma.conf.js --log-level debug --single-run --browsers ChromeHeadless"
   },
   "dependencies": {
     "global": "^4.3.2"
