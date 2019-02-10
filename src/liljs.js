@@ -17,15 +17,11 @@ const liljs = (elem, data = {}) => {
   const render = property => {
     /** Set Text helper function
      * @function setText
-     * @param {Element} Element to set the text on
-     * @param {String} Name of the property to render
-     * @param {String} A value to use instead of a property (used in lil-list-text)
+     * @param {Element} elem Element to set the text on
+     * @param {String} property Name of the property to render
+     * @param {String} value (Optional) A value to use instead of a property (used in lil-list-text)
      */
-    const setText = (elem, property, value) => {
-      value ?
-        (elem.innerHTML = value) :
-        (elem.innerHTML = state[property].value);
-    };
+    const setText = (elem, property, value) => elem.innerHTML = value || state[property].value;
 
     /** Set style helper function
      * @function setStyle
