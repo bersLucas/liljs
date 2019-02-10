@@ -30,6 +30,11 @@
           <span lil-list-text="listText"></span></b>
       </li>
     </template>
+
+    <h2>dynamic updates</h2>
+
+    You've been here for <span lil-text="seconds"></span> seconds!
+
   </app>
 </body>
 
@@ -71,6 +76,12 @@ var app = liljs(appElem, {
     {
       listText: "3"
     }
-  ]
+  ],
+  seconds: 1
 });
+
+setInterval(function () {
+  app.seconds = app.seconds.value + 1
+}, 1000)
+
 </script>
