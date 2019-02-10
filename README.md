@@ -1,11 +1,11 @@
 ![liljs logo](https://user-images.githubusercontent.com/3892772/52523602-d0054680-2c60-11e9-9cba-582003254e54.png)
 
-![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square) 
+![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square)
 [![version](https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square)](https://www.npmjs.com/package/@berslucas/liljs)
 [![David Dependency Status](https://img.shields.io/david/bersLucas/liljs.svg?style=popout-square)](https://david-dm.org/bersLucas/liljs)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
-# Installation 
+# Installation
 
 ```bash
 # Fetch the package with npm
@@ -26,15 +26,17 @@ To start a liljs instance, you must call the function `liljs` with an html eleme
 
 ```html
 <div id="app">
-  <span lil-text="textValue"></span>
+  <!-- Elements using lil-* attributes -->
 </div>
 
 <script>
   let app = liljs(
     document.querySelector('#app'),
+    /*
     {
-      textValue: 'hello world',
+      propertyName: propertyValue
     }
+    */
   );
 </script>
 ```
@@ -53,6 +55,79 @@ Properties can be updated by changing their value. This will also re-render the 
 | - | - | - |
 | `lil-text` | text | String |
 | `lil-style` | style | Object |
-| `lil-list` | list | Array | 
+| `lil-list` | list | Array |
 
+### lil-text
+```html
+<div id="app">
+  <span lil-text="textValue"></span>
+</div>
 
+<script>
+  let app = liljs(
+    document.querySelector('#app'),
+    {
+      textValue: 'hello world',
+    }
+  );
+</script>
+```
+
+This property type appends the value of the property `textValue` into this span. To dynamically update this value, modify the value of `app.textValue`.
+
+### lil-style
+```html
+<div id="app">
+  <span lil-style="styleObj"></span>
+</div>
+
+<script>
+  let app = liljs(
+    document.querySelector('#app'),
+    {
+      styleObj: {
+        color: "white",
+        backgroundColor: "#f9a02b"
+      },
+    }
+  );
+</script>
+```
+
+This property type changes the style of the span element. The key values of `styleObj` in this example are CSS style names and the values are the corresponding values for those CSS keys. As per the docs for [HTMLElement.style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style), CSS style names should be in camelCase and not kebab-case.
+
+### lil-list
+```html
+<div id="app">
+  <ul>
+    <div lil-list="listItem"></div>
+  </ul>
+</div>
+
+<template id="listItem">
+  <li>
+    List item: <span lil-list-text="listText"></span></b>
+  </li>
+</template>
+
+<script>
+  let app = liljs(
+    document.querySelector('#app'),
+    {
+      listItem: [
+        {
+          listText: 'one'
+        },
+        {
+          listText: 'two'
+        },
+        {
+          listText: 'three'
+        }
+      ]
+    }
+  );
+</script>
+```
+
+This property type is used to repeat values and present them using a template. A [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) element will hold the repeated content. The ID of the `<template>` <i>must<i> have the same name as the property's name. The template can contain `lil-list-text` attribute, which will contain sub-properties.
