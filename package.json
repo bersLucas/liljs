@@ -26,7 +26,7 @@
     "minify": "uglifyjs dist/liljs.js -o dist/liljs.min.js --source-map",
     "docs": "jsdoc src/liljs.js -d docs",
     "prepublish": "npm run babel && npm run minify && npm run docs",
-    "test": "karma start karma.conf.js --log-level debug --single-run --browsers ChromeHeadless"
+    "test": "karma start karma.conf.js --single-run --browsers ChromeHeadless"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
