@@ -1,0 +1,59 @@
+html,
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+html {
+  background: white;
+}
+
+body {
+  max-width: 1280px;
+  margin: auto;
+}
+
+#logo-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img#logo {
+  padding: 10px;
+}
+
+demo {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+demo:before {
+  content: attr(for);
+  width: 100%;
+  background: #f9a02b;;
+  padding: 10px;
+  font-size: 1.45em;
+  color: white;
+  font-weight: bold;
+}
+
+demo>.app {
+  display: inline-block;
+  float: left;
+  padding: 1em;
+  background: #323232;
+  color: #f1f1f1;
+  width: 100px;
+  max-width: 400px;
+  flex-grow: 2;
+}
+
+demo,
+demo pre {
+  float: left;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}

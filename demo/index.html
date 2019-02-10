@@ -3,85 +3,130 @@
 
 <head>
   <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/zenburn.min.css">
+  <script src="../src/liljs.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
 </head>
 
 <body>
-  <app>
-    <h1>lil.js</h1>
-    <h2>lil-text</h2>
-    <div lil-text="quote1"></div>
-    <h2>lil-style</h2>
-    <div lil-style="styleObj">My styling is being applied via a proxy!</div>
-    <h2>lil-text & lil-style</h2>
-    <div lil-style="styleObj" lil-text="quote2"></div>
-    <h2>lil-list</h2>
-    <ul>
-      <li lil-list="listItem"></li>
-    </ul>
+  <div id="logo-flex">
+    <img id="logo" src="../logo.svg" />
+    <div>
+      <a target="_blank" rel="noopener noreferrer" href="https://camo.githubusercontent.com/88e124d1c012a7e1062499ea30a63b3132bdb15b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73697a652f626572734c756361732f6c696c2e6a732f646973742f6c696c6a732e6d696e2e6a732e7376673f6c6162656c3d73697a65267374796c653d706f706f75742d737175617265"><img
+          src="https://camo.githubusercontent.com/88e124d1c012a7e1062499ea30a63b3132bdb15b/68747470733a2f2f696d672e736869656c64732e696f2f6769746875622f73697a652f626572734c756361732f6c696c2e6a732f646973742f6c696c6a732e6d696e2e6a732e7376673f6c6162656c3d73697a65267374796c653d706f706f75742d737175617265"
+          alt="File Size"></a>
+      <a href="https://www.npmjs.com/package/@berslucas/liljs" rel="nofollow"><img src="https://camo.githubusercontent.com/d2744fd98df9eb4c946cc77609f624399688e514/68747470733a2f2f696d672e736869656c64732e696f2f6e706d2f762f40626572736c756361732f6c696c6a732e7376673f7374796c653d706f706f75742d737175617265"
+          alt="version"></a>
+      <a href="http://makeapullrequest.com" rel="nofollow"><img src="https://camo.githubusercontent.com/70766800e03ae25cfdc790bdb642df6b24857612/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f7072732d77656c636f6d652d627269676874677265656e2e7376673f7374796c653d666c61742d737175617265"
+          alt="PRs Welcome"></a>
+    </div>
+  </div>
+  <h2>Getting Started</h2>
+  <h3>Downloading</h3>
+  <pre>
+    <code class="bash">
+      # Fetch the package with npm
+      npm install @berslucas/liljs
 
-    <h3>This is another list</h3>
-    <ul>
-      <li lil-list="listItem2"></li>
-    </ul>
+      # ...or with yarn
+      yarn add @berslucas/liljs
+    </code>
+  </pre>
+
+  <h3>Installation</h3>
+  <pre>
+    <code class="html">
+      &lt;script src="../node_modules/@berslucas/liljs/dist/liljs.min.js"&gt;&lt;/script&gt;
+    </code>
+  </pre>
+
+  <h2>Demos</h2>
+  <template demo for="lil-text">
+    <div class="app" id="app1">
+      <span lil-text="textValue"></span>
+    </div>
+
+
+    <script>
+      let app1 = liljs(
+        document.querySelector('#app1'), {
+          textValue: 'hello world',
+        }
+      );
+
+      //Modify app1.textValue in the console!
+    </script>
+  </template>
+
+  <template demo for="lil-style">
+    <div class="app" id="app2">
+      <span lil-style="styleObj">This text is styled!</span>
+    </div>
+
+    <script>
+      let app2 = liljs(
+        document.querySelector('#app2'), {
+          styleObj: {
+            color: "white",
+            backgroundColor: "#00adef",
+            padding: "5px",
+            transform: "rotate(-3deg)",
+            display: "inline-block"
+          },
+        }
+      );
+    </script>
+  </template>
+
+  <template demo for="lil-list & lil-list-text">
+    <div class="app" id="app3">
+      <ul>
+        <div lil-list="listItem"></div>
+      </ul>
+    </div>
 
     <template id="listItem">
       <li>
-        List item <span lil-style="styleObj">value</span>: <b>
-          <span lil-list-text="listText"></span></b>
+        List item: <span lil-list-text="listText"></span></b>
       </li>
     </template>
 
-    <h2>dynamic updates</h2>
+    <script>
+      let app = liljs(
+        document.querySelector('#app3'), {
+          listItem: [{
+              listText: 'one'
+            },
+            {
+              listText: 'two'
+            },
+            {
+              listText: 'three'
+            }
+          ]
+        }
+      );
+    </script>
+  </template>
 
-    You've been here for <span lil-text="seconds"></span> seconds!
+  <template demo for="Dynamic updates">
+    <div class="app" id="app4">
+      You've been here for <span lil-text="seconds"></span> seconds!
+    </div>
 
-  </app>
+    <script>
+      let app4 = liljs(
+        document.querySelector('#app4'), {
+          seconds: 0,
+        }
+      );
+
+      setInterval(function() {
+        app4.seconds = app4.seconds.value + 1
+      }, 1000);
+    </script>
+  </template>
 </body>
 
-<template id="listItem2">
-  <li>
-    <span lil-list-text="listText"></span>
-  </li>
-</template>
-
-<script src="../src/liljs.js"></script>
-
-<script>
-var appElem = document.querySelector("app");
-var app = liljs(appElem, {
-  quote1: "This text is applied via a proxy!",
-  quote2: "I'm being styled AND my text is being applied via a proxy!",
-  styleObj: {
-    color: "white",
-    backgroundColor: "#f9a02b"
-  },
-  listItem: [
-    {
-      listText: "a"
-    },
-    {
-      listText: "b"
-    },
-    {
-      listText: "c"
-    }
-  ],
-    listItem2: [
-    {
-      listText: "1"
-    },
-    {
-      listText: "2"
-    },
-    {
-      listText: "3"
-    }
-  ],
-  seconds: 1
-});
-
-setInterval(function () {
-  app.seconds = app.seconds.value + 1
-}, 1000)
-
-</script>
+<script src="script.js"></script>
