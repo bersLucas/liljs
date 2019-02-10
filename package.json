@@ -20,14 +20,21 @@
     "babel": "npx babel src --out-dir dist  --presets=@babel/preset-env",
     "minify": "uglifyjs dist/liljs.js -o dist/liljs.min.js --source-map",
     "docs": "jsdoc src/liljs.js -d docs",
-    "default": "yarn run babel && yarn run minify && yarn run docs"
+    "default": "yarn run babel && yarn run minify && yarn run docs",
+    "test": "karma start karma.conf.js --log-level debug --single-run"
   },
-  "dependencies": {},
+  "dependencies": {
+    "global": "^4.3.2"
+  },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
     "jsdoc": "^3.5.5",
+    "karma": "^4.0.0",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^2.0.0",
+    "karma-jasmine": "^2.0.1",
     "uglify-js": "^3.4.9"
   }
 }
