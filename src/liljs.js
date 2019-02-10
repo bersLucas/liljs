@@ -21,7 +21,7 @@ const liljs = (elem, data = {}) => {
      * @param {String} property Name of the property to render
      * @param {String} value (Optional) A value to use instead of a property (used in lil-list-text)
      */
-    const setText = (elem, property, value) => elem.innerHTML = value || state[property].value;
+    const setText = (elem, property, value) => elem.textContent = value || state[property].value;
 
     /** Set style helper function
      * @function setStyle
@@ -43,7 +43,7 @@ const liljs = (elem, data = {}) => {
      */
     const setList = (elem, property) => {
       //TODO: Find a way to update without clearing lists
-      elem.innerHTML = "";
+      elem.textContent = "";
       state[property].value.forEach(value => {
         let clone = document.importNode(state[property].template.content, true);
         clone.querySelectorAll("[lil-list-text]").forEach(node => {
