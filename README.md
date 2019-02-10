@@ -1,8 +1,9 @@
 ![liljs logo](https://user-images.githubusercontent.com/3892772/52523602-d0054680-2c60-11e9-9cba-582003254e54.png)
 
-![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square)
+[![File Size](https://img.shields.io/github/size/bersLucas/lil.js/dist/liljs.min.js.svg?label=size&style=popout-square)](https://www.npmjs.com/package/@berslucas/liljs)
 [![version](https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square)](https://www.npmjs.com/package/@berslucas/liljs)
 [![David Dependency Status](https://img.shields.io/david/bersLucas/liljs.svg?style=popout-square)](https://david-dm.org/bersLucas/liljs)
+[![David devDependencyStatus](https://img.shields.io/david/dev/bersLucas/liljs.svg?style=popout-square)](https://david-dm.org/bersLucas/liljs?type=dev)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![travis CI](https://img.shields.io/travis/bersLucas/liljs.svg?style=popout-square)](https://travis-ci.org/bersLucas/liljs)
 
