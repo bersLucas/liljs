@@ -21,11 +21,7 @@ const liljs = (elem, data = {}) => {
      * @param {String} Name of the property to render
      * @param {String} A value to use instead of a property (used in lil-list-text)
      */
-    const setText = (elem, property, value) => {
-      value ?
-        (elem.innerHTML = value) :
-        (elem.innerHTML = state[property].value);
-    };
+    const setText = (elem, property, value) => elem.innerHTML = value || state[property].value;
 
     /** Set style helper function
      * @function setStyle
