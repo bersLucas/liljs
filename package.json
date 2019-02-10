@@ -11,6 +11,11 @@
     "micro-framework",
     "MVW"
   ],
+  "files": [
+    "dist",
+    "src",
+    "demo"
+  ],
   "bugs": "https://github.com/bersLucas/liljs/issues",
   "author": "bersLucas <contact@lucasbersier.com>",
   "browserslist": "> 0.25%, not dead",
