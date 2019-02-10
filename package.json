@@ -1,8 +1,8 @@
 {
   "name": "@berslucas/liljs",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A micro-framework for Javascript data-binding.",
-  "main": "dist/lil.js",
+  "main": "dist/liljs.js",
   "repository": "https://github.com/bersLucas/liljs",
   "keywords": [
     "framework",
@@ -20,11 +20,8 @@
     "babel": "npx babel src --out-dir dist  --presets=@babel/preset-env",
     "minify": "uglifyjs dist/liljs.js -o dist/liljs.min.js --source-map",
     "docs": "jsdoc src/liljs.js -d docs",
-    "default": "yarn run babel && yarn run minify && yarn run docs",
+    "prepublish": "npm run babel && npm run minify && npm run docs",
     "test": "karma start karma.conf.js --log-level debug --single-run --browsers ChromeHeadless"
-  },
-  "dependencies": {
-    "global": "^4.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
