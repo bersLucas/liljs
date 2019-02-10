@@ -127,6 +127,46 @@
       }, 1000);
     </script>
   </template>
+
+  <template demo for="lil-bind">
+    <div class="app" id="app5">
+      <div class="form">
+        <label>Name:
+          <input width="100%" lil-bind="personName" lil-bind-from="value" />
+        </label>
+        <label>Age:
+          <input width="100%" type="number" lil-bind="personAge" lil-bind-from="value" />
+        </label>
+        <label>Over 18?
+          <input type="checkbox" lil-bind="personOver18" lil-bind-from="checked" />
+        </label>
+        <label>
+          Choose a pet:
+          <select id="pet-select" lil-bind="personPet" lil-bind-from="value">
+            <option value="">--Please choose an option--</option>
+            <option value="dog">Dog</option>
+            <option value="cat">Cat</option>
+            <option value="hamster">Hamster</option>
+          </select>
+        </label>
+        <label>Description:
+          <textarea lil-bind="personDescription" lil-bind-from="value"></textarea>
+        </label>
+      </div>
+
+      <br />
+
+      <div>Your name is: <span lil-text="personName"></span></div>
+      <div>Your age is: <span lil-text="personAge"></span></div>
+      <div>Over 18? <span lil-text="personOver18"></span></div>
+      <div>Pet: <span lil-text="personPet"></span></div>
+      <div>Description: <span lil-text="personDescription"></span></div>
+    </div>
+
+    <script>
+      let app5 = liljs(document.querySelector('#app5'), {});
+    </script>
+  </template>
 </body>
 
 <script src="script.js"></script>

@@ -57,3 +57,17 @@ demo pre {
   padding: 0;
   flex-grow: 1;
 }
+
+demo .form {
+  display: flex;
+  flex-direction: column;
+}
+
+demo .form label,
+demo .form select {
+  margin: 5px 0;
+}
+
+demo .form textarea {
+  width: 100%;
+}

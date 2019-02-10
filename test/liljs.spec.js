@@ -40,4 +40,8 @@ describe('liljs', () => {
       expect(app.textValue.value).toEqual('goodbye world');
     });
   });
+
+  afterEach(function () {
+    document.body.innerHTML = '';
+  });
 });

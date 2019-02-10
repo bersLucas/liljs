@@ -73,6 +73,17 @@ const liljs = (elem, data = {}) => {
     return state[property];
   };
 
+  /** @function apply
+  * @param {String} property  Name of the property to apply
+  * @descrription Called after a value updates to update bound elements as well
+  */
+  const apply = (property) => {
+    state[property].boundedElem.forEach(elem => {
+      const boundAttr = elem.getAttribute(`lil-bind-from`);
+      elem[boundAttr] = state[property].value;
+    });
+  };
+
   /** A single property to be added inside a '[lil-*]' attribute
    * These are generated from liljs()
    * @class Property
@@ -89,6 +100,7 @@ const liljs = (elem, data = {}) => {
     this.render = () => {
       render(this.name);
     };
+    this.boundedElem = [];
     if (this.bindType == "list") {
       this.template = document.querySelector(`#${this.name}`);
     }
@@ -121,10 +133,28 @@ const liljs = (elem, data = {}) => {
     });
   });
 
+  // Initialize bindings
+  elem.querySelectorAll(`[lil-bind]`).forEach(elem => {
+    const attributeName = elem.getAttribute(`lil-bind`);
+    const boundAttr = elem.getAttribute(`lil-bind-from`);
+    if (state[attributeName]) {
+      elem.oninput = (event) => {
+        if (event.target[boundAttr] != state[attributeName].value) {
+          state[attributeName].value = event.target[boundAttr];
+          state[attributeName].render();
+        }
+      };
+      state[attributeName].boundedElem.push(elem);
+    } else{
+      throw(`The property "${attributeName}" doesn't exist.`)
+    }
+  });
+
   return new Proxy(state, {
     set(target, property, value) {
       target[property].value = value;
       render(property);
+      apply(property);
       return true;
     }
   });
