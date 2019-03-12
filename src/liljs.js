@@ -137,17 +137,21 @@ const liljs = (elem, data = {}) => {
   elem.querySelectorAll(`[lil-bind]`).forEach(elem => {
     const attributeName = elem.getAttribute(`lil-bind`);
     const boundAttr = elem.getAttribute(`lil-bind-from`);
-    if (state[attributeName]) {
-      elem.oninput = (event) => {
-        if (event.target[boundAttr] != state[attributeName].value) {
-          state[attributeName].value = event.target[boundAttr];
-          state[attributeName].render();
-        }
-      };
-      state[attributeName].boundedElem.push(elem);
-    } else{
-      throw(`The property "${attributeName}" doesn't exist.`)
+    if (!state[attributeName]) {
+      state[attributeName] = new Property(
+        attributeName,
+        'text',
+        elem,
+        ''
+      );
     }
+    elem.oninput = (event) => {
+      if (event.target[boundAttr] != state[attributeName].value) {
+        state[attributeName].value = event.target[boundAttr];
+        state[attributeName].render();
+      }
+    };
+    state[attributeName].boundedElem.push(elem);
   });
 
   return new Proxy(state, {
