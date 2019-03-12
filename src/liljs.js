@@ -73,10 +73,24 @@ const liljs = (elem, data = {}) => {
     return state[property];
   };
 
+  /** Adds a new property to the liljs instance
+   * @function setList
+   * @param {Element} Element to set the styles on
+   * @property {String} Name of the property to render
+   */
+  const addProp = (name, type, elemList, value) => {
+    return state[name] = new Property(
+      name,
+      type,
+      elemList,
+      value
+    );
+  };
+
   /** @function apply
-  * @param {String} property  Name of the property to apply
-  * @descrription Called after a value updates to update bound elements as well
-  */
+   * @param {String} property  Name of the property to apply
+   * @descrription Called after a value updates to update bound elements as well
+   */
   const apply = (property) => {
     state[property].boundedElem.forEach(elem => {
       const boundAttr = elem.getAttribute(`lil-bind-from`);
@@ -154,6 +168,8 @@ const liljs = (elem, data = {}) => {
     state[attributeName].boundedElem.push(elem);
   });
 
+  state['addProp'] = addProp;
+  
   return new Proxy(state, {
     set(target, property, value) {
       target[property].value = value;
