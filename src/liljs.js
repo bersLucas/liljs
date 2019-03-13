@@ -42,7 +42,9 @@ const liljs = (elem, data = {}) => {
     const setStyle = (elem, property) => {
       elem.setAttribute("style", null);
       Object.keys(state[property].value).forEach(key => {
-        elem.style[key] = state[property].value[key];
+        elem.style[key] = typeof state[property].value[key] === 'function' ?
+          state[property].value[key](getPropsFromElem(elem)) :
+          state[property].value[key];
       });
     };
 
