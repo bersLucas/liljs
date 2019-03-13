@@ -22,7 +22,6 @@ const liljs = (elem, data = {}) => {
      * @param {String} value (Optional) A value to use instead of a property (used in lil-list-text)
      */
     const setText = (elem, property, value) => {
-      console.log(elem.childNodes);
       //Remove all child nodes that are TEXT
       Array.from(elem.childNodes).forEach(node => {
         if (node.nodeType === 3) {
@@ -48,7 +47,7 @@ const liljs = (elem, data = {}) => {
     };
 
     /** Set list helper function
-     * calls setText() and setStyle() to apply those properties to the template node\
+     * calls setText() and setStyle() to apply those properties to the template node
      * @function setList
      * @param {Element} Element to set the styles on
      * @property {String} Name of the property to render
@@ -129,35 +128,42 @@ const liljs = (elem, data = {}) => {
     this.boundedElem = [];
     if (this.bindType == "list") {
       this.template = document.querySelector(`#${this.name}`);
+      setProps(this.template);
     }
   }
 
-  // Initialization
-  ["text", "style", "list"].forEach(bindType => {
-    elem.querySelectorAll(`[lil-${bindType}]`).forEach(elem => {
-      const attributeName = elem.getAttribute(`lil-${bindType}`);
+  const setProps = (elem) =>{
+    ["text", "style", "list"].forEach(bindType => {
+      let children = elem.nodeName === 'TEMPLATE' ? elem.content : elem
+      children.querySelectorAll(`[lil-${bindType}]`).forEach(elem => {
+        console.log(elem.getAttribute(`lil-${bindType}`))
+        const attributeName = elem.getAttribute(`lil-${bindType}`);
 
-      // If an element shares a property with another element...
-      if (state[attributeName]) {
-        // Add the element to the property's elem Array...
-        state[attributeName].elem.push(elem);
+        // If an element shares a property with another element...
+        if (state[attributeName]) {
+          // Add the element to the property's elem Array...
+          state[attributeName].elem.push(elem);
+          render(attributeName);
+
+          // And do not create a new propery
+          return;
+        }
+
+        state[attributeName] = new Property(
+          attributeName,
+          bindType,
+          elem,
+          data[attributeName]
+        );
+
+        // Render the property for the first time
         render(attributeName);
-
-        // And do not create a new propery
-        return;
-      }
-
-      state[attributeName] = new Property(
-        attributeName,
-        bindType,
-        elem,
-        data[attributeName]
-      );
-
-      // Render the property for the first time
-      render(attributeName);
+      });
     });
-  });
+  }
+
+  // Initialization
+  setProps(elem)
 
   // Initialize bindings
   elem.querySelectorAll(`[lil-bind]`).forEach(elem => {
@@ -181,6 +187,7 @@ const liljs = (elem, data = {}) => {
   });
 
   state['addProp'] = addProp;
+  state['elem'] = elem;
 
   return new Proxy(state, {
     set(target, property, value) {
