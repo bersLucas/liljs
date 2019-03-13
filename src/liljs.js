@@ -21,7 +21,19 @@ const liljs = (elem, data = {}) => {
      * @param {String} property Name of the property to render
      * @param {String} value (Optional) A value to use instead of a property (used in lil-list-text)
      */
-    const setText = (elem, property, value) => elem.textContent = value || state[property].value;
+    const setText = (elem, property, value) => {
+      console.log(elem.childNodes);
+      //Remove all child nodes that are TEXT
+      Array.from(elem.childNodes).forEach(node => {
+        if (node.nodeType === 3) {
+          node.parentElement.removeChild(node);
+        }
+      });
+
+      elem.appendChild(document.createTextNode(
+        value || state[property].value
+      ));
+    }
 
     /** Set style helper function
      * @function setStyle
@@ -169,7 +181,7 @@ const liljs = (elem, data = {}) => {
   });
 
   state['addProp'] = addProp;
-  
+
   return new Proxy(state, {
     set(target, property, value) {
       target[property].value = value;
