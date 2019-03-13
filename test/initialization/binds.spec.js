@@ -32,7 +32,8 @@ describe('liljs', () => {
         expect(typeof app.textValue.boundedElem[0].oninput).toEqual('function');
       });
 
-      it('should throw an error when using lil-bind with a property that does not exist', () => {
+      //TODO: it should create a property if it doesn't exist
+      xit('should throw an error when using lil-bind with a property that does not exist', () => {
           setUp(badText);
           var elem = document.querySelector('#app');
           try{

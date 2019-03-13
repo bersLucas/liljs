@@ -1,0 +1,57 @@
+<!doctype>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="style.css">
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/zenburn.min.css"> -->
+  <script src="../src/liljs.js"></script>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script> -->
+</head>
+
+<body>
+  <div class="app" id="app6">
+    <b>To-do:</b>
+    <ul>
+      <div lil-list="todoList"></div>
+    </ul>
+
+    <label>New Item:
+      <input autocomplete='off' lil-bind="newItem" lil-bind-from="value" />
+    </label>
+    <button>Add</button>
+  </div>
+
+  <template id="todoList">
+    <li>
+      <label onclick="toggle(app6.$props.todoList)" lil-style="listItemStyle" lil-list-text="item">
+        <input style="display: none" type="checkbox"/>
+      </span>
+    </li>
+  </template>
+
+  <script>
+    let app6 = liljs(document.querySelector('#app6'), {
+        listItemStyle: {
+            textDecoration: (props) => {
+              return props.todoList.complete ? 'line-through' : 'none'
+            }
+        },
+        todoList: [{
+          item: 'Buy bread',
+          complete: false
+        }, {
+          item: 'Take a bath',
+          complete: true
+        }]
+    });
+
+    document.querySelector('button').onclick = () => {
+      app6.todoList.value.push({
+        item: app6.newItem.value,
+        checked: false
+      });
+      app6.todoList.render();
+    }
+  </script>
+</body>

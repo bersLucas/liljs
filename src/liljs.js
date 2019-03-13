@@ -52,18 +52,39 @@ const liljs = (elem, data = {}) => {
       });
     };
 
+    const getPropsFromElem = (elem) => {
+      let returnObj = {};
+
+      Array.from(elem.attributes).filter(attr => {
+        return ["text", "style", "list", ].some(bindTypes => {
+          return 'lil-' + bindTypes == attr.name
+        });
+      }).map(attr => {
+        returnObj[state[attr.value].name] = state[attr.value].value;
+      })
+
+      if (elem.getAttribute('lil-index')) {
+        returnObj[elem.getAttribute('lil-list-parent')] =
+          state[elem.getAttribute('lil-list-parent')].value[elem.getAttribute('lil-index')]
+      }
+
+      return returnObj;
+    };
+
     /** Set list helper function
      * calls setText() and setStyle() to apply those properties to the template node
      * @function setList
      * @param {Element} Element to set the styles on
      * @property {String} Name of the property to render
      */
-    const setList = (elem, property) => {
+    const setList = (elem, property, name) => {
       //TODO: Find a way to update without clearing lists
       elem.textContent = "";
-      state[property].value.forEach(value => {
+      state[property].value.forEach((value, index) => {
         let clone = document.importNode(state[property].template.content, true);
         clone.querySelectorAll("[lil-list-text]").forEach(node => {
+          node.setAttribute('lil-index', index);
+          node.setAttribute('lil-list-parent', name);
           setText(node, null, value[node.getAttribute("lil-list-text")]);
         });
         clone.querySelectorAll("[lil-style]").forEach(node => {
@@ -82,7 +103,7 @@ const liljs = (elem, data = {}) => {
           setStyle(elem, property);
           break;
         case "list":
-          setList(elem, property);
+          setList(elem, property, state[property].name);
           break;
       }
     });
@@ -138,11 +159,10 @@ const liljs = (elem, data = {}) => {
     }
   }
 
-  const setProps = (elem) =>{
+  const setProps = (elem) => {
     ["text", "style", "list"].forEach(bindType => {
       let children = elem.nodeName === 'TEMPLATE' ? elem.content : elem
       children.querySelectorAll(`[lil-${bindType}]`).forEach(elem => {
-        console.log(elem.getAttribute(`lil-${bindType}`))
         const attributeName = elem.getAttribute(`lil-${bindType}`);
 
         // If an element shares a property with another element...
