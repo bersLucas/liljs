@@ -52,25 +52,6 @@ const liljs = (elem, data = {}) => {
       });
     };
 
-    const getPropsFromElem = (elem) => {
-      let returnObj = {};
-
-      Array.from(elem.attributes).filter(attr => {
-        return ["text", "style", "list", ].some(bindTypes => {
-          return 'lil-' + bindTypes == attr.name
-        });
-      }).map(attr => {
-        returnObj[state[attr.value].name] = state[attr.value].value;
-      })
-
-      if (elem.getAttribute('lil-index')) {
-        returnObj[elem.getAttribute('lil-list-parent')] =
-          state[elem.getAttribute('lil-list-parent')].value[elem.getAttribute('lil-index')]
-      }
-
-      return returnObj;
-    };
-
     /** Set list helper function
      * calls setText() and setStyle() to apply those properties to the template node
      * @function setList
@@ -90,9 +71,22 @@ const liljs = (elem, data = {}) => {
         clone.querySelectorAll("[lil-style]").forEach(node => {
           setStyle(node, node.getAttribute("lil-style"));
         });
+        clone.querySelectorAll("[lil-click]").forEach(node => {
+          setClick(node, node.getAttribute("lil-click"));
+        });
         elem.appendChild(clone);
       });
     };
+
+    const setClick = (elem, property) => {
+      elem.onclick =  (e) => {
+        e.preventDefault();
+        window[property](
+          getPropsFromElem(e.target),
+          elem
+        )
+      };
+    }
 
     state[property].elem.forEach(elem => {
       switch (state[property].bindType) {
@@ -105,10 +99,38 @@ const liljs = (elem, data = {}) => {
         case "list":
           setList(elem, property, state[property].name);
           break;
+        case 'click':
+          setClick(elem, property);
+          break;
       }
     });
 
     return state[property];
+  };
+
+  const getPropsFromElem = (elem) => {
+    let returnObj = {};
+
+    //TODO: Normalize this so it always returns a Prop value and an index if needed
+    Array.from(elem.attributes).filter(attr => {
+      return ["text", "style", "list", "click"].some(bindTypes => {
+        return 'lil-' + bindTypes == attr.name
+      });
+    }).map(attr => {
+      returnObj[state[attr.value].name] = state[attr.value]
+    })
+
+    if (elem.getAttribute('lil-index')) {
+
+      returnObj[elem.getAttribute('lil-list-parent')] =
+        {
+          array: state[elem.getAttribute('lil-list-parent')],
+          index: elem.getAttribute('lil-index'),
+          value: state[elem.getAttribute('lil-list-parent')].value[elem.getAttribute('lil-index')]
+        }
+    }
+
+    return returnObj;
   };
 
   /** Adds a new property to the liljs instance
@@ -160,7 +182,7 @@ const liljs = (elem, data = {}) => {
   }
 
   const setProps = (elem) => {
-    ["text", "style", "list"].forEach(bindType => {
+    ["text", "style", "list", "click"].forEach(bindType => {
       let children = elem.nodeName === 'TEMPLATE' ? elem.content : elem
       children.querySelectorAll(`[lil-${bindType}]`).forEach(elem => {
         const attributeName = elem.getAttribute(`lil-${bindType}`);
