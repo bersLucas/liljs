@@ -171,7 +171,7 @@
       </ul>
 
       <label>New Item:
-        <input autocomplete='off' lil-bind="newItem" lil-bind-from="value"/>
+        <input autocomplete='off' lil-bind="newItem" lil-bind-from="value" />
       </label>
       <button>Add</button>
     </div>
@@ -179,31 +179,31 @@
     <template id="todoList">
       <li>
         <label lil-click="toggle" lil-style="listItemStyle" lil-list-text="item">
-          <input style="display: none" type="checkbox"/>
+          <input style="display: none" type="checkbox" />
         </label>
       </li>
     </template>
 
     <script>
       let app6 = liljs(document.querySelector('#app6'), {
-          listItemStyle: {
-              textDecoration: (props) => {
-                return props.todoList.value.complete ? 'line-through' : 'none'
-              }
-          },
-          todoList: [{
-            item: 'Buy bread',
-            complete: false
-          }, {
-            item: 'Take a bath',
-            complete: true
-          }]
+        listItemStyle: {
+          textDecoration: (props) => {
+            return props.todoList.value.complete ? 'line-through' : 'none'
+          }
+        },
+        todoList: [{
+          item: 'Buy bread',
+          complete: false
+        }, {
+          item: 'Take a bath',
+          complete: true
+        }]
       });
 
       toggle = (props, elem) => {
         let todo = props.todoList;
         todo.array.value = todo.array.value.map((item, index) => {
-          if(index == todo.index) {
+          if (index == todo.index) {
             item.complete = !item.complete;
           }
           return item;

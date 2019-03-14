@@ -1,6 +1,6 @@
 {
   "name": "@berslucas/liljs",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "A micro-framework for Javascript data-binding.",
   "main": "dist/liljs.js",
   "repository": "https://github.com/bersLucas/liljs",
