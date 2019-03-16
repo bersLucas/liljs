@@ -16,8 +16,7 @@ const liljs = (elem, data = {}) => {
 
     // TODO: Normalize this so it always returns a Prop value and an index if needed
     Array.from(propElem.attributes).filter(attr => ['text', 'style', 'list', 'click']
-      // TODO: Find which value to parseInt() so we can use ===
-      .some(bindTypes => `lil-${bindTypes}` == attr.name)).forEach((attr) => {
+      .some(bindTypes => `lil-${bindTypes}` === attr.name)).forEach((attr) => {
       returnObj[state[attr.value].name] = state[attr.value];
     });
 
@@ -229,18 +228,19 @@ const liljs = (elem, data = {}) => {
         '',
       );
     }
-    state[attributeName].boundedElem.push(boundElem);
     boundElem.oninput = (event) => {
       if (event.target[boundAttr] !== state[attributeName].value) {
         state[attributeName].value = event.target[boundAttr];
         state[attributeName].render();
       }
     };
+    state[attributeName].boundedElem.push(boundElem);
     state[attributeName].elem.push(boundElem);
   });
 
   state.addProp = addProp;
   state.elem = elem;
+  state.getProp = getPropsFromElem;
 
   return new Proxy(state, {
     set(target, property, value) {

@@ -29,7 +29,6 @@ describe('liljs', () => {
         setUp(goodText);
         const elem = document.querySelector('#app');
         const app = liljs(elem, {});
-        console.log(app.textValue.boundedElem);
         expect(app.textValue.boundedElem.length).toEqual(1);
         expect(app.textValue.boundedElem[0].getAttribute('lil-bind-from')).toEqual('value');
       });
