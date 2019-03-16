@@ -141,7 +141,7 @@ const liljs = (elem, data = {}) => {
    * @param {String} name of the property
    * @param {String} bindType of binding (text, style, ect...)
    * @param {Array} propElem to bind the property to.
-   * @param {String, Array, Object} value (Optional) Initial value
+   * @param {Any} value (Optional) Initial value
    */
   function Property(name, bindType, propElem, value = null) {
     this.name = name;
@@ -229,6 +229,7 @@ const liljs = (elem, data = {}) => {
         '',
       );
     }
+    state[attributeName].boundedElem.push(boundElem);
     boundElem.oninput = (event) => {
       if (event.target[boundAttr] !== state[attributeName].value) {
         state[attributeName].value = event.target[boundAttr];
