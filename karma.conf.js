@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = config => {
   config.set({
     basePath: '',
     frameworks: ['jasmine'],
@@ -13,8 +13,8 @@ module.exports = function(config) {
     colors: true,
     logLevel: config.LOG_INFO,
     autoWatch: false,
-    browsers: ['Chrome'],
+    browsers: ['ChromeHeadless'],
     singleRun: false,
-    concurrency: Infinity
-  })
-}
+    concurrency: Infinity,
+  });
+};
