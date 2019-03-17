@@ -20,10 +20,12 @@ yarn add @berslucas/liljs
 ## .html file
 ```html
 <!--Include liljs as a <script> tag-->
-<script src="../node_modules/@berslucas/liljs/dist/liljs.min.js"></script>
+<script src="../ node_modules/@berslucas/liljs/dist/liljs.min.js"></script>
 ```
 
 # Getting Started
+For demos and examples, please visit **[lucasbersier.com/liljs](https://lucasbersier.com/liljs/)**
+
 To start a liljs instance, you must call the function `liljs` with an html element to bootstrap to and an optional object with data for the first render cycle.
 
 ```html
@@ -32,19 +34,17 @@ To start a liljs instance, you must call the function `liljs` with an html eleme
 </div>
 
 <script>
-  let app = liljs(
-    document.querySelector('#app'),
-    /*
-    {
-      propertyName: propertyValue
-    }
-    */
-  );
+  liljs(document.querySelector('#app'), {
+    propertyName: propertyValue,
+    propertyName: propertyValue,
+    ...
+  }).then((app) => {
+    
+  });
 </script>
 ```
 
-This will create a new liljs instance with a proxy for the value of `textValue` and render "hello world" into the span above. To edit the text in the span, you can modify the value of `app.textValue`, which will update the text value and also re-render that span.
-
+The `liljs` promise will initialize and render your app, and the returned value, `app` will be a proxy containing all properties you have defined. To change a value, use `app.propertyName` and that value will be update both in your proxy and in the DOM.
 
 # Properties
 
@@ -52,84 +52,26 @@ A Property is a value attached to the liljs proxy that will update the proxy onc
 
 Properties can be updated by changing their value. This will also re-render the element that the property is attached to.
 
-## Property bindTypes.
-| .html attribute | bindType | expects |
+## addProp
+
+Sometimes you'd like to add a property after the app has been rendered. This is possible by calling `app.addProp` on your proxy object.
+
+```javascript
+liljs(document.querySelector('#app'), {
+    propertyName: propertyValue,
+    ...
+}).then((app) => {
+  app.addProp(
+    name, type, elemList, value
+  )
+});
+```
+
+This function takes the following parameters:
+
+| Name | Type |	Description |
 | - | - | - |
-| `lil-text` | text | String |
-| `lil-style` | style | Object |
-| `lil-list` | list | Array |
-
-### lil-text
-```html
-<div id="app">
-  <span lil-text="textValue"></span>
-</div>
-
-<script>
-  let app = liljs(
-    document.querySelector('#app'),
-    {
-      textValue: 'hello world',
-    }
-  );
-</script>
-```
-
-This property type appends the value of the property `textValue` into this span. To dynamically update this value, modify the value of `app.textValue`.
-
-### lil-style
-```html
-<div id="app">
-  <span lil-style="styleObj"></span>
-</div>
-
-<script>
-  let app = liljs(
-    document.querySelector('#app'),
-    {
-      styleObj: {
-        color: "white",
-        backgroundColor: "#f9a02b"
-      },
-    }
-  );
-</script>
-```
-
-This property type changes the style of the span element. The key values of `styleObj` in this example are CSS style names and the values are the corresponding values for those CSS keys. As per the docs for [HTMLElement.style](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/style), CSS style names should be in camelCase and not kebab-case.
-
-### lil-list
-```html
-<div id="app">
-  <ul>
-    <div lil-list="listItem"></div>
-  </ul>
-</div>
-
-<template id="listItem">
-  <li>
-    List item: <span lil-list-text="listText"></span></b>
-  </li>
-</template>
-
-<script>
-  let app = liljs(
-    document.querySelector('#app'),
-    {
-      listItem: [
-        {
-          listText: 'one'
-        },
-        {
-          listText: 'two'
-        },
-        {
-          listText: 'three'
-        }
-      ]
-    }
-  );
-</script>
-```
-
-This property type is used to repeat values and present them using a template. A [`<template>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) element will hold the repeated content. The ID of the `<template>` <i>must<i> have the same name as the property's name. The template can contain `lil-list-text` attribute, which will contain sub-properties.
+| name | String | Name of a property to add |
+| type |	String 	| Bind type (style, text, list, ect...) |
+|elemList |	Array |	Array of element(s) to apply this property to|
+| value 	| Any 	| Name of the property to render |

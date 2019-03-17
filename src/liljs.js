@@ -187,11 +187,11 @@ const liljs = (elem, data = {}) => {
   };
 
   /** Adds a new property to the liljs instance
-   * @function setList
+   * @function addProp
    * @param {String} name Name of a property to add
    * @param {String} type bindType (style, text, list, ect...)
    * @param {Array} elemList Array of element(s) to apply this property to
-   * @param {String} value Name of the property to render
+   * @param {*} value Name of the property to render
    */
   const addProp = (name, type, elemList, value) => {
     state[name] = new Property(
@@ -213,41 +213,45 @@ const liljs = (elem, data = {}) => {
     });
   };
 
-  // Initialization
-  setProps(elem);
-
   // Initialize bindings
-  elem.querySelectorAll('[lil-bind]').forEach((boundElem) => {
-    const attributeName = boundElem.getAttribute('lil-bind');
-    const boundAttr = boundElem.getAttribute('lil-bind-from');
-    if (!state[attributeName]) {
-      state[attributeName] = new Property(
-        attributeName,
-        'text',
-        boundElem,
-        '',
-      );
-    }
-    boundElem.oninput = (event) => {
-      if (event.target[boundAttr] !== state[attributeName].value) {
-        state[attributeName].value = event.target[boundAttr];
-        state[attributeName].render();
-      }
-    };
-    state[attributeName].boundedElem.push(boundElem);
-    state[attributeName].elem.push(boundElem);
-  });
+  const initBinding = Promise.all(
+    Array.from(elem.querySelectorAll('[lil-bind]')).map((boundElem) => {
+      const promise = new Promise((res) => {
+        const attributeName = boundElem.getAttribute('lil-bind');
+        const boundAttr = boundElem.getAttribute('lil-bind-from');
+        if (!state[attributeName]) {
+          state[attributeName] = new Property(
+            attributeName,
+            'text',
+            boundElem,
+            '',
+          );
+        }
+        boundElem.oninput = (event) => {
+          if (event.target[boundAttr] !== state[attributeName].value) {
+            state[attributeName].value = event.target[boundAttr];
+            state[attributeName].render();
+          }
+        };
+        state[attributeName].boundedElem.push(boundElem);
+        state[attributeName].elem.push(boundElem);
+        res(state[attributeName]);
+      });
+      return promise;
+    }),
+  );
 
   state.addProp = addProp;
   state.elem = elem;
   state.getProp = getPropsFromElem;
 
-  return new Proxy(state, {
+  // Initialization
+  return initBinding.then(() => setProps(elem)).then(() => new Proxy(state, {
     set(target, property, value) {
       target[property].value = value;
       render(property);
       apply(property);
       return true;
     },
-  });
+  }));
 };

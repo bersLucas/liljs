@@ -38,49 +38,53 @@ describe('liljs', () => {
       it('should initialize the property', () => {
         setUp(simple);
         const elem = document.querySelector('#app');
-        const app = liljs(elem, {
+        liljs(elem, {
           textValue: 'hello world',
+        }).then((app) => {
+          expect(elem.querySelector('span[lil-text]').innerHTML).toEqual('hello world');
+          expect(app.textValue.value).toEqual('hello world');
         });
-        expect(elem.querySelector('span[lil-text]').innerHTML).toEqual('hello world');
-        expect(app.textValue.value).toEqual('hello world');
       });
 
       it('should be defined', () => {
         setUp(simple);
         const elem = document.querySelector('#app');
-        const app = liljs(elem, {
+        liljs(elem, {
           textValue: 'hello world',
+        }).then((app) => {
+          expect(app.getProp).toBeDefined();
+          expect(typeof app.getProp).toEqual('function');
         });
-        expect(app.getProp).toBeDefined();
-        expect(typeof app.getProp).toEqual('function');
       });
 
       it('should return the property values attached to an element', () => {
         setUp(simple);
         const elem = document.querySelector('#app');
-        const app = liljs(elem, {
+        liljs(elem, {
           textValue: 'hello world',
+        }).then((app) => {
+          const returnedProp = app.getProp(elem.querySelector('span[lil-text]'));
+          expect(returnedProp.textValue.constructor.name).toEqual('Property');
         });
-        const returnedProp = app.getProp(elem.querySelector('span[lil-text]'));
-        expect(returnedProp.textValue.constructor.name).toEqual('Property');
       });
 
       it('should be able to return multiple properties', () => {
         setUp(complex);
         const elem = document.querySelector('#app');
-        const app = liljs(elem, {
+        liljs(elem, {
           textValue: 'hello world',
           styleObj: {},
+        }).then((app) => {
+          const returnedProp = app.getProp(elem.querySelector('span[lil-text]'));
+          expect(returnedProp.textValue.constructor.name).toEqual('Property');
+          expect(returnedProp.styleObj.constructor.name).toEqual('Property');
         });
-        const returnedProp = app.getProp(elem.querySelector('span[lil-text]'));
-        expect(returnedProp.textValue.constructor.name).toEqual('Property');
-        expect(returnedProp.styleObj.constructor.name).toEqual('Property');
       });
 
       it('should be able to return the parent functions from a lil-list property', () => {
         setUp(todo);
         const elem = document.querySelector('#app');
-        const app = liljs(elem, {
+        liljs(elem, {
           todoList: [{
             item: 'Buy bread',
             complete: false,
@@ -88,13 +92,13 @@ describe('liljs', () => {
             item: 'Take a bath',
             complete: true,
           }],
+        }).then((app) => {
+          const returnedProp = app.getProp(elem.querySelector('label[lil-index]'));
+          expect(returnedProp.todoList.constructor.name).toEqual('Object');
+          expect(returnedProp.todoList.array.constructor.name).toEqual('Property');
+          expect(returnedProp.todoList.index).toEqual('0');
+          expect(returnedProp.todoList.value).toEqual(app.todoList.value[0]);
         });
-
-        const returnedProp = app.getProp(elem.querySelector('label[lil-index]'));
-        expect(returnedProp.todoList.constructor.name).toEqual('Object');
-        expect(returnedProp.todoList.array.constructor.name).toEqual('Property');
-        expect(returnedProp.todoList.index).toEqual('0');
-        expect(returnedProp.todoList.value).toEqual(app.todoList.value[0]);
       });
 
       afterEach(() => {
