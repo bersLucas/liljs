@@ -6,6 +6,7 @@
 [![David devDependencyStatus](https://img.shields.io/david/dev/bersLucas/liljs.svg?style=popout-square)](https://david-dm.org/bersLucas/liljs?type=dev)
 [![PRs Welcome](https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![travis CI](https://img.shields.io/travis/bersLucas/liljs.svg?style=popout-square)](https://travis-ci.org/bersLucas/liljs)
+[![Gitter](https://img.shields.io/gitter/room/bersLucas/liljs.svg?style=popout-square)](https://gitter.im/liljs)
 
 # Installation
 
