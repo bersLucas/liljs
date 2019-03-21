@@ -2,13 +2,15 @@
  * @function liljs
  * @param {Element} elem Parent application element. All '[lil-*]' elements
  *                  must be a child of this parent element.
- * @param {Object} data (optional) An object containing values to initalize the application with.
+ * @param {Object} data (optional) An object containing values to initialize the application with.
+ * @param {Object} methods (optional) An object containing all methods to be used by the app.
  * @return {Proxy} A proxy object with all properties. Values can be updated by modifying these
 *                  values
  */
-const liljs = (elem, data = {}) => {
+const liljs = (elem, data = {}, methods = {}) => {
   // Initial State Obj
   const state = {};
+  state.methods = methods;
 
   // TODO: Write JS Docs for this function
   const getPropsFromElem = (propElem) => {
@@ -75,11 +77,15 @@ const liljs = (elem, data = {}) => {
       });
     };
 
-    // TODO: Write JS Docs
+    /**
+     * Set click helper function
+     * @param {Element} propElem to add a click event to
+     * @param {String} propertyName of the property to render
+     */
     const setClick = (propElem, propertyName) => {
       propElem.onclick = (e) => {
         e.preventDefault();
-        window[propertyName](
+        state.methods[propertyName](
           getPropsFromElem(e.target),
           elem,
         );
