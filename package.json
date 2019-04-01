@@ -1,6 +1,6 @@
 {
   "name": "@berslucas/liljs",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "A DOM-driven micro-framework for Javascript applications ",
   "main": "dist/liljs.js",
   "repository": "https://github.com/bersLucas/liljs",

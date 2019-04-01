@@ -2,23 +2,25 @@
 <html>
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/zenburn.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/zenburn.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
 </head>
 
 <body>
-  <div id="logo-flex">
-    <a href="https://github.com/bersLucas/liljs"><img id="logo" alt="logo" src="logo.svg" /></a>
+<div id="logo-flex">
+    <a href="https://github.com/bersLucas/liljs"><img id="logo" alt="logo" src="logo.svg"/></a>
     <div>
-      <a href="https://www.npmjs.com/package/@berslucas/liljs" rel="nofollow"><img src="https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square" alt="version"></a>
-      <a href="http://makeapullrequest.com" rel="nofollow"><img src="https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
+        <a href="https://www.npmjs.com/package/@berslucas/liljs" rel="nofollow"><img
+                src="https://img.shields.io/npm/v/@berslucas/liljs.svg?style=popout-square" alt="version"></a>
+        <a href="http://makeapullrequest.com" rel="nofollow"><img
+                src="https://img.shields.io/badge/prs-welcome-brightgreen.svg?style=flat-square" alt="PRs Welcome"></a>
     </div>
-  </div>
-  <h2>Getting Started</h2>
-  <h3>Downloading</h3>
-  <pre>
+</div>
+<h2>Getting Started</h2>
+<h3>Downloading</h3>
+<pre>
     <code class="bash">
       # Fetch the package with npm
       npm install @berslucas/liljs
@@ -28,17 +30,27 @@
     </code>
   </pre>
 
-  <h3>Installation</h3>
-  <pre>
+<h3>Installation</h3>
+<h4>&lt;script&gt;</h4>
+<pre>
     <code class="html">
       &lt;script src="../node_modules/@berslucas/liljs/dist/liljs.min.js"&gt;&lt;/script&gt;
+      &lt;script&gt;
+        //Use locally
+      &lt;/script&gt;
     </code>
-  </pre>
-
-  <h2>Demos</h2>
-  <template demo for="lil-text">
+</pre>
+<h4>ES6 Imports</h4>
+<pre>
+    <code class="html">
+      &lt;script&gt; type="module"&gt;
+      import {liljs} from './liljs.js';
+    </code>
+</pre>
+<h2>Demos</h2>
+<template demo for="lil-text">
     <div class="app" id="app1">
-      <span lil-text="textValue"></span>
+        <span lil-text="textValue"></span>
     </div>
 
     <script type="module">
@@ -48,11 +60,11 @@
         textValue: 'hello world',
       });
     </script>
-  </template>
+</template>
 
-  <template demo for="lil-style">
+<template demo for="lil-style">
     <div class="app" id="app2">
-      <span lil-style="styleObj">This text is styled!</span>
+        <span lil-style="styleObj">This text is styled!</span>
     </div>
 
     <script type="module">
@@ -68,19 +80,19 @@
         },
       });
     </script>
-  </template>
+</template>
 
-  <template demo for="lil-list & lil-list-text">
+<template demo for="lil-list & lil-list-text">
     <div class="app" id="app3">
-      <ul>
-        <div lil-list="listItem"></div>
-      </ul>
+        <ul>
+            <div lil-list="listItem"></div>
+        </ul>
     </div>
 
     <template id="listItem">
-      <li>
-        List item: <span lil-list-text="listText"></span></b>
-      </li>
+        <li>
+            List item: <span lil-list-text="listText"></span></b>
+        </li>
     </template>
 
     <script type="module">
@@ -88,8 +100,8 @@
 
       liljs(document.querySelector('#app3'), {
         listItem: [{
-            listText: 'one'
-          },
+          listText: 'one'
+        },
           {
             listText: 'two'
           },
@@ -99,11 +111,11 @@
         ]
       });
     </script>
-  </template>
+</template>
 
-  <template demo for="Dynamic updates">
+<template demo for="Dynamic updates">
     <div class="app" id="app4">
-      You've been here for <span lil-text="seconds"></span> seconds!
+        You've been here for <span lil-text="seconds"></span> seconds!
     </div>
 
     <script type="module">
@@ -112,46 +124,46 @@
       liljs(document.querySelector('#app4'), {
         seconds: 0,
       }).then(app => {
-        setInterval(function() {
+        setInterval(function () {
           app.seconds = app.seconds.value + 1
         }, 1000);
       })
     </script>
-  </template>
+</template>
 
-  <template demo for="lil-bind">
+<template demo for="lil-bind">
     <div class="app" id="app5">
-      <div class="form">
-        <label>Name:
-          <input width="100%" lil-bind="personName" lil-bind-from="value" />
-        </label>
-        <label>Age:
-          <input width="100%" type="number" lil-bind="personAge" lil-bind-from="value" />
-        </label>
-        <label>Over 18?
-          <input type="checkbox" lil-bind="personOver18" lil-bind-from="checked" />
-        </label>
-        <label>
-          Choose a pet:
-          <select id="pet-select" lil-bind="personPet" lil-bind-from="value">
-            <option value="">--Please choose an option--</option>
-            <option value="dog">Dog</option>
-            <option value="cat">Cat</option>
-            <option value="hamster">Hamster</option>
-          </select>
-        </label>
-        <label>Description:
-          <textarea lil-bind="personDescription" lil-bind-from="value"></textarea>
-        </label>
-      </div>
+        <div class="form">
+            <label>Name:
+                <input width="100%" lil-bind="personName" lil-bind-from="value"/>
+            </label>
+            <label>Age:
+                <input width="100%" type="number" lil-bind="personAge" lil-bind-from="value"/>
+            </label>
+            <label>Over 18?
+                <input type="checkbox" lil-bind="personOver18" lil-bind-from="checked"/>
+            </label>
+            <label>
+                Choose a pet:
+                <select id="pet-select" lil-bind="personPet" lil-bind-from="value">
+                    <option value="">--Please choose an option--</option>
+                    <option value="dog">Dog</option>
+                    <option value="cat">Cat</option>
+                    <option value="hamster">Hamster</option>
+                </select>
+            </label>
+            <label>Description:
+                <textarea lil-bind="personDescription" lil-bind-from="value"></textarea>
+            </label>
+        </div>
 
-      <br />
+        <br/>
 
-      <div>Your name is: <span lil-text="personName"></span></div>
-      <div>Your age is: <span lil-text="personAge"></span></div>
-      <div>Over 18? <span lil-text="personOver18"></span></div>
-      <div>Pet: <span lil-text="personPet"></span></div>
-      <div>Description: <span lil-text="personDescription"></span></div>
+        <div>Your name is: <span lil-text="personName"></span></div>
+        <div>Your age is: <span lil-text="personAge"></span></div>
+        <div>Over 18? <span lil-text="personOver18"></span></div>
+        <div>Pet: <span lil-text="personPet"></span></div>
+        <div>Description: <span lil-text="personDescription"></span></div>
     </div>
 
     <script type="module">
@@ -159,27 +171,27 @@
 
       liljs(document.querySelector('#app5'), {});
     </script>
-  </template>
+</template>
 
-  <template demo for="ToDo List">
+<template demo for="ToDo List">
     <div class="app" id="app6">
-      <b>To-do:</b>
-      <ul>
-        <div lil-list="todoList"></div>
-      </ul>
+        <b>To-do:</b>
+        <ul>
+            <div lil-list="todoList"></div>
+        </ul>
 
-      <label>New Item:
-        <input autocomplete='off' lil-bind="newItem" lil-bind-from="value" />
-      </label>
-      <button>Add</button>
+        <label>New Item:
+            <input autocomplete='off' lil-bind="newItem" lil-bind-from="value"/>
+        </label>
+        <button>Add</button>
     </div>
 
     <template id="todoList">
-      <li>
-        <label lil-click="toggle" lil-style="listItemStyle" lil-list-text="item">
-          <input style="display: none" type="checkbox" />
-        </label>
-      </li>
+        <li>
+            <label lil-click="toggle" lil-style="listItemStyle" lil-list-text="item">
+                <input style="display: none" type="checkbox"/>
+            </label>
+        </li>
     </template>
 
     <script type="module">
@@ -221,7 +233,7 @@
         }
       });
     </script>
-  </template>
+</template>
 </body>
 
 <script src="script.js"></script>
