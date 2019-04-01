@@ -1,8 +1,8 @@
 {
   "name": "@berslucas/liljs",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "A DOM-driven micro-framework for Javascript applications ",
-  "main": "dist/liljs.js",
+  "main": "src/liljs.js",
   "repository": "https://github.com/bersLucas/liljs",
   "keywords": [
     "framework",
