@@ -261,3 +261,5 @@ const liljs = (elem, data = {}, methods = {}) => {
     },
   }));
 };
+
+export { liljs };
