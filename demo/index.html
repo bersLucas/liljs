@@ -5,7 +5,6 @@
   <meta charset="utf-8">
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/styles/zenburn.min.css">
-  <script src="../src/liljs.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.14.2/highlight.min.js"></script>
 </head>
 
@@ -42,8 +41,9 @@
       <span lil-text="textValue"></span>
     </div>
 
+    <script type="module">
+      import {liljs} from './liljs.js';
 
-    <script>
       liljs(document.querySelector('#app1'), {
         textValue: 'hello world',
       });
@@ -55,7 +55,9 @@
       <span lil-style="styleObj">This text is styled!</span>
     </div>
 
-    <script>
+    <script type="module">
+      import {liljs} from './liljs.js';
+
       liljs(document.querySelector('#app2'), {
         styleObj: {
           color: "white",
@@ -81,7 +83,9 @@
       </li>
     </template>
 
-    <script>
+    <script type="module">
+      import {liljs} from './liljs.js';
+
       liljs(document.querySelector('#app3'), {
         listItem: [{
             listText: 'one'
@@ -102,7 +106,9 @@
       You've been here for <span lil-text="seconds"></span> seconds!
     </div>
 
-    <script>
+    <script type="module">
+      import {liljs} from './liljs.js';
+
       liljs(document.querySelector('#app4'), {
         seconds: 0,
       }).then(app => {
@@ -148,7 +154,9 @@
       <div>Description: <span lil-text="personDescription"></span></div>
     </div>
 
-    <script>
+    <script type="module">
+      import {liljs} from './liljs.js';
+
       liljs(document.querySelector('#app5'), {});
     </script>
   </template>
@@ -174,7 +182,9 @@
       </li>
     </template>
 
-    <script>
+    <script type="module">
+      import {liljs} from './liljs.js';
+
       liljs(document.querySelector('#app6'), {
         listItemStyle: {
           cursor: 'pointer',
