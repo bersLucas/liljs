@@ -11,6 +11,7 @@ html {
 body {
     max-width: 1280px;
     margin: auto;
+    padding: 0 4vmin;
 }
 
 #logo-flex {

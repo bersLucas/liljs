@@ -3,7 +3,7 @@ module.exports = (config) => {
     basePath: '',
     frameworks: ['jasmine'],
     files: [
-      'src/liljs.js',
+      'dist/liljs.umd.js',
       'test/**/*.js',
     ],
     exclude: [],

@@ -1,8 +1,9 @@
 {
   "name": "@berslucas/liljs",
-  "version": "3.0.1",
+  "version": "4.0.0",
   "description": "A DOM-driven micro-framework for Javascript applications ",
-  "main": "src/liljs.js",
+  "main": "dist/liljs.umd.js",
+  "module": "dist/liljs.esm.js",
   "repository": "https://github.com/bersLucas/liljs",
   "keywords": [
     "framework",
@@ -22,9 +23,10 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "minify": "terser src/liljs.js -m --ecma 8 --module -o dist/liljs.min.js --source-map",
+    "rollup": "rollup src/liljs.js --file dist/liljs.esm.js --f esm --name \"liljs\" && rollup src/liljs.js --file dist/liljs.umd.js --f umd --name \"liljs\"",
+    "minify": "terser dist/liljs.umd.js -m --ecma 8 --module --source-map -o dist/liljs.umd.min.js && terser dist/liljs.esm.js -m --ecma 8 --module --source-map -o dist/liljs.esm.min.js ",
     "docs": "jsdoc src/liljs.js -d docs",
-    "prepare": "npm run minify && npm run docs && node generate_gzip.js",
+    "prepare": "npm run rollup && npm run minify && npm run docs && node generate_gzip.js",
     "test": "karma start karma.conf.js --single-run --browsers ChromeHeadless"
   },
   "devDependencies": {
@@ -37,6 +39,7 @@
     "karma-cli": "^2.0.0",
     "karma-jasmine": "^2.0.1",
     "pako": "^1.0.10",
+    "rollup": "^1.8.0",
     "terser": "^3.17.0"
   }
 }

@@ -7,7 +7,7 @@
  * @return {Proxy} A proxy object with all properties. Values can be updated by modifying these
 *                  values
  */
-const liljs = (elem, data = {}, methods = {}) => {
+export default function liljs(elem, data = {}, methods = {}) {
   // Initial State Obj
   const state = {};
   state.methods = methods;
@@ -260,6 +260,4 @@ const liljs = (elem, data = {}, methods = {}) => {
       return true;
     },
   }));
-};
-
-export { liljs };
+}

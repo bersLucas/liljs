@@ -30,23 +30,42 @@
     </code>
   </pre>
 
-<h3>Installation</h3>
-<h4>&lt;script&gt;</h4>
+<h3>Usages</h3>
+<h4>ES6 Imports</h4>
+<pre><code class="html">
+    &lt;script&gt; type="module"&gt;
+        import liljs from '../node_modules/@berslucas/liljs/dist/liljs.esm.js';
+
+        liljs(ELEMENT, VALUES)
+            .then(app => {
+                //app = liljs proxy
+        });
+    &lt;/script&gt;
+
+</code></pre>
+<h4>AMD (RequireJS) or CommonJS (Node)</h4>
+<pre><code class="javascript">
+    let liljs = require('@berslucas/liljs');
+
+    liljs(ELEMENT, VALUES)
+        .then(app => {
+            //app = liljs proxy
+    });
+
+</code></pre>
+<h4>&lt;script&gt; tags</h4>
 <pre>
     <code class="html">
-      &lt;script src="../node_modules/@berslucas/liljs/dist/liljs.min.js"&gt;&lt;/script&gt;
+      &lt;script src="../node_modules/@berslucas/liljs/dist/liljs.umd.js"&gt;&lt;/script&gt;
       &lt;script&gt;
-        //Use locally
+        liljs(ELEMENT, VALUES)
+        .then(app => {
+            //app = liljs proxy
+        });
       &lt;/script&gt;
     </code>
 </pre>
-<h4>ES6 Imports</h4>
-<pre>
-    <code class="html">
-      &lt;script&gt; type="module"&gt;
-      import {liljs} from './liljs.js';
-    </code>
-</pre>
+
 <h2>Demos</h2>
 <template demo for="lil-text">
     <div class="app" id="app1">
@@ -54,7 +73,7 @@
     </div>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app1'), {
         textValue: 'hello world',
@@ -68,7 +87,7 @@
     </div>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app2'), {
         styleObj: {
@@ -96,7 +115,7 @@
     </template>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app3'), {
         listItem: [{
@@ -119,7 +138,7 @@
     </div>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app4'), {
         seconds: 0,
@@ -167,7 +186,7 @@
     </div>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app5'), {});
     </script>
@@ -195,7 +214,7 @@
     </template>
 
     <script type="module">
-      import {liljs} from './liljs.js';
+      import liljs from '../dist/liljs.esm.js';
 
       liljs(document.querySelector('#app6'), {
         listItemStyle: {
