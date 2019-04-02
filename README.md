@@ -8,22 +8,6 @@
 [![travis CI](https://img.shields.io/travis/bersLucas/liljs.svg?style=popout-square)](https://travis-ci.org/bersLucas/liljs)
 [![Gitter](https://img.shields.io/gitter/room/bersLucas/liljs.svg?style=popout-square)](https://gitter.im/liljs)
 
-# Installation
-
-```bash
-# Fetch the package with npm
-npm install @berslucas/liljs
-
-# ...or with yarn
-yarn add @berslucas/liljs
-```
-
-## .html file
-```html
-<!--Include liljs as a <script> tag-->
-<script src="../ node_modules/@berslucas/liljs/dist/liljs.min.js"></script>
-```
-
 # Getting Started
 For demos and examples, please visit **[lucasbersier.com/liljs](https://lucasbersier.com/liljs/)**
 
