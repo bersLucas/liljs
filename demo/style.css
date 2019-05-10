@@ -20,8 +20,14 @@ body {
     align-items: center;
 }
 
-img#logo {
+img#logo, article {
     padding: 10px;
+    font-size: 110%;
+    line-height: 1.2;
+}
+
+article {
+    max-width: 650px;
 }
 
 demo {
