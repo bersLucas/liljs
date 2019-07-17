@@ -1,6 +1,6 @@
 {
   "name": "@berslucas/liljs",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "A DOM-driven micro-framework for Javascript applications ",
   "main": "dist/liljs.umd.js",
   "module": "dist/liljs.esm.js",
@@ -30,16 +30,16 @@
     "test": "karma start karma.conf.js --single-run --browsers ChromeHeadless"
   },
   "devDependencies": {
-    "eslint": "^5.16.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.17.3",
-    "jsdoc": "^3.6.2",
-    "karma": "^4.1.0",
-    "karma-chrome-launcher": "^2.2.0",
+    "eslint": "^6.0.1",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.18.0",
+    "jsdoc": "^3.6.3",
+    "karma": "^4.2.0",
+    "karma-chrome-launcher": "^3.0.0",
     "karma-cli": "^2.0.0",
     "karma-jasmine": "^2.0.1",
     "pako": "^1.0.10",
-    "rollup": "^1.14.2",
-    "terser": "^4.0.0"
+    "rollup": "^1.17.0",
+    "terser": "^4.1.2"
   }
 }
